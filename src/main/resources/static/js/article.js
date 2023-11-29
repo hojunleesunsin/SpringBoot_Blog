@@ -14,6 +14,7 @@ if (deleteButton) {
     });
 }
 
+// 수정 기능
 const modifyButton = document.getElementById('modify-btn')
 
 if (modifyButton) {
@@ -28,12 +29,34 @@ if (modifyButton) {
             },
             body: JSON.stringify({
                 title: document.getElementById('title').value,
-                content: document.getElementById('content').value
+                content: document.getElementById('content').value,
             })
         })
             .then(() => {
                 alert('수정이 완료되었습니다.');
                 location.replace(`/articles/${id}`);
+            });
+    });
+}
+
+// 생성 기능
+const createButton = document.getElementById('create-btn');
+
+if (createButton) {
+    createButton.addEventListener('click', event => {
+        fetch('/api/articles', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: document.getElementById('title').value,
+                content: document.getElementById('content').value
+            })
+        })
+            .then(() => {
+                alert('등록 완료되었습니다.');
+                location.replace('/articles');
             });
     });
 }
